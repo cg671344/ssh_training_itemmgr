@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/includes.jsp"%>
+<%@page import="org.displaytag.decorator.TableDecorator"%>
+<%@page import="com.displaytag.myDisplaytag.tableDecrator.CheckboxTableDecorator" %>
+<%@page import="com.bjsxt.drp.business.itemmgr.model.Item"%>
+
+<html>
+	<head>
+		<script type="text/javascript">
+			var contextPath = getContextPath();
+			function getContextPath(){
+			    var pathName = document.location.pathname;
+			    var index = pathName.substr(1).indexOf("/");
+			    var result = pathName.substr(0,index+1);
+			    return result;
+			};
+		</script>
+		<link href="<%=request.getContextPath()%>/theme/displaytag.css"
+			rel="stylesheet" type="text/css" />
+		<link href="<%=request.getContextPath()%>/theme/teststyles.css"
+			rel="stylesheet" type="text/css" />
+		<jsp:scriptlet>
+         request.setAttribute("dyndecorator", new TableDecorator()
+        {
+            public String addRowClass()
+            {
+                return ((Item)getCurrentRowObject()).getItemNo().compareTo("dd") > 0 ? "good" : "bad";
+            }
+			public String addRowId()
+			{
+			return "myrow" + evaluate("itemNo");
+			}
+        });
+       com.displaytag.myDisplaytag.tableDecrator.CheckboxTableDecorator decorator = 
+       				new com.displaytag.myDisplaytag.tableDecrator.CheckboxTableDecorator();
+        decorator.setItemNo("itemNo");
+        decorator.setFieldName("_chk");
+        pageContext.setAttribute("checkboxDecorator", decorator);
+        
+   </jsp:scriptlet>
+	</head>
+	<body>
+	<form name="displ" action="?" method="get">
+	
+		<display:table name="rs.results" export="true" pagesize="2"
+			requestURI="/basedata/item.do" sort="list" id="element" style="true"
+			partialList="true" size="rs.total"
+			decorator="checkboxDecorator" form="displ"  excludedParams="_chk">
+			<display:column property="checkbox" />		
+			<display:column title="编号" property="itemNo" sortable="true"
+				headerClass="sortable" />
+			<display:column title="名称" property="itemName" sortable="true"
+				headerClass="sortable" />
+			<display:column title="规格" property="spec" sortable="true"
+				class="money" headerClass="sortable" />
+			<display:column title="Click on the link to test">
+				<a href="#"
+					onclick="alert('Row id: ' + this.parentNode.parentNode.id)">row
+					id</a>
+			</display:column>
+		</display:table>
+		</form>
+		<p>
+			<a
+				href="<%=request.getContextPath()%>/basedata/item.do?command=list&amp;pageNo=1&amp;pageSize=2">
+				返回列表
+			</a>
+		</p>
+	</body>
+</html>

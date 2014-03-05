@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/includes.jsp"%>
+
+
+<html>
+	<script type="text/javascript">
+var contextPath = getContextPath();
+function getContextPath(){
+    var pathName = document.location.pathname;
+    var index = pathName.substr(1).indexOf("/");
+    var result = pathName.substr(0,index+1);
+    return result;
+};
+</script>
+
+<link href="<%=request.getContextPath()%>/theme/content.css" rel="stylesheet" type="text/css" />
+	<body>
+		<div class="table_main">
+			<display:table name="rs.results" export="false" pagesize="2"
+				requestURI="/basedata/item.do" sort="list" id="element"
+				partialList="true" size="rs.total" class="data_grid">
+				<display:column title="编号" property="itemNo" headerClass="width:10%"/>
+				<display:column title="名称" property="itemName" headerClass="w40%"/>
+				<display:column title="规格" property="spec" headerClass="w40%"/>
+			</display:table>
+		</div>
+		<p>
+			<a href="<%=request.getContextPath()%>/basedata/item.do?command=list&amp;pageNo=1&amp;pageSize=2">返回列表
+			</a>
+		</p>
+	</body>
+</html>

@@ -1,0 +1,3 @@
+<%@ taglib prefix="fmt" uri="/WEB-INF/tlds/fmt.tld" %>
+<%@ taglib prefix="display" uri="/WEB-INF/tlds/displaytag.tld"%>
+<%@ taglib prefix="c" uri="/WEB-INF/tlds/c.tld"%>

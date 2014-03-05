@@ -1,0 +1,7 @@
+#Tue Apr 17 17:04:40 CST 2012
+eclipse.preferences.version=1
+encoding//WebRoot/index.jsp=UTF-8
+encoding//src/MessageResources_zh_CN.properties=UTF-8
+encoding//src/com/bjsxt/drp/web/itemmgr/actions/ChangeLanguageAction.java=UTF-8
+encoding//src/o.properties=GBK
+instance/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
